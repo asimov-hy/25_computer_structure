@@ -65,7 +65,7 @@
 
 <!-- Image (Right) -->
 <div style="flex: 1; min-width: 100px; text-align: center;">
-  <img src="images/02-1(Computer_System).png" alt="Computer System Diagram" style="max-width: 50%; height: auto;">
+  <img src="images/02-1\02-1(Computer_System).png" alt="Computer System Diagram" style="max-width: 50%; height: auto;">
 </div>
 
 </div>
@@ -101,7 +101,7 @@
 ## What shapes computer architecture?
 
 <div style="text-align: center;">
-  <img src="images\02-1(Com_arch_arena).png" style="max-width: 60%; height: auto;">
+  <img src="images\02-1\02-1(Com_arch_arena).png" style="max-width: 60%; height: auto;">
 </div>
 
 ## Design Goal
@@ -151,37 +151,163 @@
 > **Smartphone**
 >
 > - has many processor cores, each optimized for different roles using different Arm Cortex series (A, R, M)
->   ![alt text](<images\02-1(smartphone).png>)
+> <br><br>
+>   ![alt text](<images\02-1\02-1(smartphone).png>)
 
 <br><br><br>
 
 <div style="text-align: center;">
 
 # Historical Performance Gains
+
 </div>
 
 1985년에 하나의 다이(die) 또는 칩(chip)에 완전한 마이크로프로세서를 통합
 기술 향상: 트랜지스터의 크기가 작아지면서 단일 코어의 성능이 빠르게 향상
 거의 20년 동안 매년 52%의 비율로 성능이 향상 (SPEC 벤치마크 데이터 - 베스크톱, 서버 프로세서 기준)
 
-## Clock Period
+## 1. Clock Period
+
+클럭 주파수는 1985년과 2002년에 800배 성능 향상상
+
 <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;">
 
 <div style="flex: 1; min-width: 500px;">
 
-- 클럭 주파수는 1985년과 2002년에 빠르게 개선:
-  - 더 빨라진 트랜지스터 -> ~10배
-  - 파이프라이닝(pipelining) & 회로수준(circuit-level) 발전 -> ~10배
+Clock Period (클럭 주기)에서 약 100배 단축
 
-  >  전체적으로 총 800배의 성능 향상중 **100배는 클럭 주기 단축에서**
+- 더 빨라진 트랜지스터 -> ~10배
+- 파이프라이닝(pipelining) & 회로수준(circuit-level) 발전 -> ~10배
 
-  <br>
+더 빠르고 저전력인 트렌지스터 제공
 
+> **프로세서의 철의 법칙 (Iron Law)**  
+> 시간 = 실행된 명령어 × 명령어당 클럭(CPI) × 클럭 주기
+>
+> > CPI: _Cycles Per Instruction_ (낮을수록 좋음)  
+> > IPC: _Instructions Per Cycle_ (높을수록 좋음)
+> >
+> > $\displaystyle \text{CPI} = \frac{1}{\text{IPC}}$  
+> > <br>
 
 </div>
   <div style="flex: 1; min-width: 100px; text-align: center;">
-    <img src="images\02-1(clock).png" alt="Computer System Diagram" style="max-width: 50%; height: auto;">
+    <img src="images\02-1\02-1(clock).png" alt="Computer System Diagram" style="max-width: 50%; height: auto;">
   </div>
 </div>
 
+## 2. Clock Per Instruction (CPI)
 
+1. 초기 컴퓨터는 트랜지스터 수가 제한 ➡ 명령을 실행하는 데 여러 클럭 사이클이 필요 (CPI ≫ 1)
+
+2. 트랜지스터 예산(budget)이 향상 ➡ CPI ≈ 1 가능
+
+   > 클럭 주파수 자체에 신경 쓰지 않는다면 CPI 낮추는 건 비교적 쉬움
+   >
+   > 하지만 **CPI가 낮은 고주파(high-frequency) 설계**는 어려움  
+   >  &nbsp;&nbsp;(고성능 프로세서를 계속 바쁘게 유지해야 함 → 다양한 기술, 많은 트랜지스터/면적/전력이 필요)
+
+3. 클럭 사이클당 여러개의 명령어를 가져옴 ➡ CPI < 1
+
+- 종종 IPC로 참조
+- 명령어가 동시에 실행되려면 독립적이어야함
+- 트랜지스터 예산 증가 ➡ 명령어 수준 병렬 처리 (ILP: Instruction-Level Parallelism)
+
+## 3. Pipelining
+
+하나의 명령어를 여러 단계로 나누고, 각 단계를 병렬로 처리하여 여러 명령어를 겹쳐 실행함으로써 처리 속도를 높이는 방식 <br><br>
+
+<div style="text-align: center;">
+  <img src="images\02-1\02-1(Pipelining).png" alt="Pipelining" style="max-width: 80%; height: auto;">
+</div>
+
+## 4. IPC and Instruction Count
+
+800배 성능 향상(1985~2002)
+
+- 100배: 클럭 주파수 개선
+- 8배: 명령어수 감소, 컴파일러 최적화 개선, IPC 개선선
+
+(오른쪽 그래프는 이러한 개선 사항을 표시. 이 그래프는 성능(시간 대비 인첼 프로세서서의 MHz당 SpecInt2000 벤치마크 성능)을 표시)
+
+<div style="text-align: center;">
+  <img src="images\02-1\02-1(SpecInt2000pMHz).png" alt="SpecInt2000pMHz" style="max-width: 80%; height: auto;">
+</div>
+
+## Shorter Critical Path
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;">
+<div style="flex: 1; min-width: 500px;">
+
+- 임계 경로의 게이트 수를 줄이는 방법
+- 추가 레지스터를 삽입 -> 복잡한 로직을 여러 파이프라이 단계로 나누기
+- 회로 수준의 설계 기술도 발전
+> 임계 경로의 길이가 약 10배 감소
+
+</div>
+<div style="flex: 1; min-width: 100px; text-align: center;">
+  <img src="images\02-1\02-1(Crit_Path).png" alt="Crit path" style="max-width: 50%; height: auto;">
+</div>
+
+</div>  
+
+### Moore's Law
+동일한 비용으로 칩에 통합할수 있는 트랜지스터의 수가 2년마다 두배로 증가
+- 마이크로 아키텍쳐 복잡해짐 ➡ 프로세서 트랜지스터 예산은 빠르게 증가
+<div style="flex: 1; min-width: 100px; text-align: center;">
+  <img src="images\02-1\02-1(Moore's Law).png" alt="Moore's Law" style="max-width: 50%; height: auto;">
+</div>
+
+## Better Performance and Lower Power
+<br>
+<div style="flex: 1; min-width: 100px; text-align: center;">
+  <img src="images\02-1\02-1(p26).png" alt="p26  " style="max-width: 80%; height: auto;">
+</div>
+
+## Slower Single-core Performance Gains
+- 연간 최고 성능 향상 -> 52% 에서 21% 로
+  - 파이프라이닝 한계
+  - ILP 한계
+  - 전력 소비
+  - 온칩 와이어의 성능
+<br><br><br>
+
+# Multiple Processors
+
+- 2005년 설계 대새 / 전환 증가
+- 클럭 주파수는 더 천천히 증가
+- 개별 코어는 가능한 높은 전력 효율이 되도록 설계
+  
+한계:
+- 전력 소비로 인해 성능 제한 가능성
+- 병렬 프로그램 작성 필요, 충분한 병렬 스레드 찾지 못할수 있음
+- 온칩, 오프칩 통신이 성능 향을 제한 (대역폭 제한 -> 코어 스로틀(throttle))
+
+## Specialization
+설계 목표를 달성하기 위해 유연성과 효율성을 맞바꿈
+- 좁은 워크로드(narrow workload), 심지어 단일 알고리즘을 위한 설계
+- 이러한 가속기는 전력과 성능 면에서 범용 솔루션보다 10~1000배 더 우수함
+
+## Today's SoC(system on a chip) Designs
+최신 휴대폰 SoC에는 70억개 이상의 트랜지스터가 포함될 수 있다
+- 여러개의 프로세서 코더, GPU, 다수의 특수 가속기, 대량의 온침 메모리, 오프칩 메모리에 대한 고대역폭 인터페이스
+
+<div style="flex: 1; min-width: 100px; text-align: center;">
+  <img src="images\02-1\02-1(soc design).png" alt="soc design" style="max-width: 50%; height: auto;">
+</div>
+
+### Trends in Computer Architecture
+
+
+<div style="flex: 1; min-width: 100px; text-align: center;">
+  <img src="images\02-1\02-1(trends).png" alt="trends" style="max-width: 80%; height: auto;">
+</div>
+<br><br><br><br><br><br><br><br><br>
+
+### The Future -- The end of Moore's Law
+최근 몇년 동안 스테일링 속도가 느려졌지만 트랜지스터 밀도는 계속 향상
+- 결국 2D 스케일링의 속도도 느려질수 밖에 없음(원자의 크기에 의해 제한)
+다음 단계:
+- 3D: 여러 층의 트랜지스터
+- 더 나은 패키징
+- 새 유형의 메모리
+- 새 재료 및 장치
