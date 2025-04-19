@@ -222,3 +222,29 @@ How to assign resources?
     - 확장성: 새 동작 추가나 변경이 간편 (가상 메모리 시스템에서 실제 물리 메모리는 계속 바뀌어도 가상 주소는 그대로)
   - 병렬 처리: 여러 작업을 동시에 수행
   - 전문화: 특정 작업에 최적화된 전용 하드웨어
+
+## Benchmarks
+일반적인 사례를 파악하고 디자인 프로세스를 안내하는데 도움을 줌
+
+아이디어를 정량적으로 신중하게 평가해야한다.
+- 실제 작업량을 정확히 알기 어렵고, 가능한 디자인 선택지가 매우 많기 때문에 설계 평가가 어렵다
+- 예전의 실수를 반복할 가능성이 있음
+  
+<br><br><br><br><br><br><br><br>
+
+<h1 style="text-align: center; font-size: 3em;">Instruction Set Architecture</h1>
+
+
+# ISA (Instruction Set Architecture)
+일반적으로 소프트웨어와 하드뒈어 사이의 인터페이스를 정의  
+- ✅: 무엇을 할수 있는지 정의
+- ❌: 어떻게 구현되는지는 설명
+
+Examples:
+- Instructions (명령어): 수행할 연산 (예: add, load, store, jump 등)
+- Registers (레지스터): 고속의 임시 저장소 (예: RISC-V의 x0 ~ x31)
+- Memory Addressing (메모리 접근 방식): 메모리에 접근하는 방법 (예: base + offset)
+- Addressing Modes (주소 지정 방식): 오퍼랜드 해석 방법
+- 기타: 인터럽트 처리, 특권 모드 등 시스템 동작에 필요한 요소 포함
+
+컴파일러에서 하드웨어로 전달할 수 있는 정보, 즉 소프트웨어에 노출되는 하드웨어 세부 정보와 숨겨지는 하드웨어 세부 정보를 정의
