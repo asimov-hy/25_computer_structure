@@ -7,9 +7,15 @@
 - 현대 컴퓨터 역사는 100녀이 안됨
   - 1930, 1940에 최초의 전자기계 및 밸브 기반 기계를 생산 -> 현대 컴퓨터는 더 빠르고, 전력 소모가 적고, 안정적
 
+<br><br><br>
+
 <!-- p5 -->
 
+<div style="text-align: center;">
+
 # 추상화 수준(Levels of Abstraction)
+
+</div>
 
 ## Architecture
 
@@ -32,9 +38,11 @@
 
 물리적 구현
 
+<br>
+
 <!-- p6 -->
 
-# Computer Architecture vs. Organization
+## Computer Architecture vs. Organization
 
 <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;">
 
@@ -75,8 +83,11 @@
 
 <br>
 <br>
+<div style="text-align: center;">
 
 # Computer Architecture
+
+</div>
 
 단순한 명령어 정의를 넘어서, HW/SW가 효과적으로 연결되도록 전체 구조를 설계하는 것
 
@@ -136,3 +147,41 @@
 > - Neoverse: 단일 칩의 확장 가능한 프로세서 네트워크
 >   - 예: 8, 16, 64 또는 128코어
 >   - 데이터센터, 엣지 서버, 스토리지 등에 사용
+>
+> **Smartphone**
+>
+> - has many processor cores, each optimized for different roles using different Arm Cortex series (A, R, M)
+>   ![alt text](<images\02-1(smartphone).png>)
+
+<br><br><br>
+
+<div style="text-align: center;">
+
+# Historical Performance Gains
+</div>
+
+1985년에 하나의 다이(die) 또는 칩(chip)에 완전한 마이크로프로세서를 통합
+기술 향상: 트랜지스터의 크기가 작아지면서 단일 코어의 성능이 빠르게 향상
+거의 20년 동안 매년 52%의 비율로 성능이 향상 (SPEC 벤치마크 데이터 - 베스크톱, 서버 프로세서 기준)
+
+## Clock Period
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;">
+
+<div style="flex: 1; min-width: 500px;">
+
+- 클럭 주파수는 1985년과 2002년에 빠르게 개선:
+  - 더 빨라진 트랜지스터 -> ~10배
+  - 파이프라이닝(pipelining) & 회로수준(circuit-level) 발전 -> ~10배
+
+  >  전체적으로 총 800배의 성능 향상중 **100배는 클럭 주기 단축에서**
+
+  <br>
+
+
+</div>
+  <div style="flex: 1; min-width: 100px; text-align: center;">
+    <img src="images\02-1(clock).png" alt="Computer System Diagram" style="max-width: 50%; height: auto;">
+  </div>
+</div>
+
+
