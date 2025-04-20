@@ -232,15 +232,21 @@ How to assign resources?
   
 <br><br><br><br><br><br><br><br>
 
+<!-- p18-------------------------------------------------------------------------- -->
+
 <h1 style="text-align: center; font-size: 3em;">Instruction Set Architecture</h1>
 
 
 # ISA (Instruction Set Architecture)
-일반적으로 소프트웨어와 하드뒈어 사이의 인터페이스를 정의  
-- ✅: 무엇을 할수 있는지 정의
-- ❌: 어떻게 구현되는지는 설명
 
-Examples:
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;">
+<div style="flex: 1; min-width: 500px;">
+일반적으로 소프트웨어와 하드뒈어 사이의 인터페이스를 정의    <br>
+- ✅: 무엇을 할수 있는지 정의  <br>
+- ❌: 어떻게 구현되는지는 설명  
+<br><br>
+
+Examples:  
 - Instructions (명령어): 수행할 연산 (예: add, load, store, jump 등)
 - Registers (레지스터): 고속의 임시 저장소 (예: RISC-V의 x0 ~ x31)
 - Memory Addressing (메모리 접근 방식): 메모리에 접근하는 방법 (예: base + offset)
@@ -248,3 +254,119 @@ Examples:
 - 기타: 인터럽트 처리, 특권 모드 등 시스템 동작에 필요한 요소 포함
 
 컴파일러에서 하드웨어로 전달할 수 있는 정보, 즉 소프트웨어에 노출되는 하드웨어 세부 정보와 숨겨지는 하드웨어 세부 정보를 정의
+<div style="text-align:center">
+
+### Computer Abstraction Stack
+
+</div>
+
+> <div style="text-align:center">
+> <strong>Top Layers (Software)</strong>
+> </div>
+> 
+> - **Problem**: The goal to solve.  
+> - **Algorithm**: Logical steps to solve the problem.  
+> - **Programming Language**: Human-readable code (e.g., Python, C++).  
+> - **Runtime System**: OS/VM that manages execution and resources.  
+>
+> <div style="text-align:center">
+> <strong>ISA Layer (Architecture)</strong>
+> </div>
+> 
+> - **ISA (Instruction Set Architecture)**: Interface between software and hardware. Defines instructions, registers, and memory model. Examples: x86, ARM, RISC-V. Software targets it; hardware implements it.  
+>
+> <div style="text-align:center">
+> <strong>Bottom Layers (Hardware)</strong>
+> </div>
+> 
+> - **Microarchitecture**: ISA implementation details.  
+> - **Logic**: Digital components (e.g., adders).  
+> - **Transistors**: Switches forming logic gates.  
+> - **Electrons**: Physical carriers of computation.
+
+
+</div>
+
+<div style="flex: 1; min-width: 100px; text-align: center;">
+<br><br><br>
+  <img src="images\02-2\computer_abstraction_stck.png" alt="images\02-2\computer_abstraction_stck.png" style="max-width: 50%; height: auto;">
+</div>
+
+</div>
+
+> ### The Instruction Set
+> 컴파일러에서 하드웨어로 전달할 수 있는 정보 : 컴파일러가 프로그램을 하드웨어에서 실행되도록 번역(컴파일)할 때, 하드웨어에 대해 알고 있어야 하는 정보를 정의
+
+## ISA Spectrum
+ISA에 따라 추상화 레벨하고 컴파일/하드웨어 성능이 다르다
+
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;">
+
+<div style="flex: 1; min-width: 10px; text-align: center;">
+<br>
+  <img src="images\02-2\ISA level.png" alt="images\02-2\ISA level.png" style="max-width: 50%; height: auto;">
+</div>
+
+<div style="flex: 1; min-width: 1000px;">
+<br>
+
+High-Level 언어를 직접 실행 (ex: Java VM)  
+- 소프트웨어 입장에서는 편하지만, 하드웨어 구현이 복잡  
+
+복잡한 명령어(CISC, Complex Instruction Set Computer)를 실행    
+- 하나의 명령어가 여러 단계를 수행 (예: x86 아키텍처)  
+- 프로그램은 짧아지지만, 하드웨어 내부 구현이 복잡  
+
+파이프라이 및 고성능 구현을 위해 명령어 세트를 맞춤 설정    
+- 명령어가 하드웨어 파이프라인에 잘 맞도록 컴파일러가 최적화  
+컴파일러에 명령어 파이프라인을 노출하여 코드를 최적화하고 하드웨어를 간소화할 수 있도록 지원   
+(RISC: Reduced Instruction Set Computer(수업에서 다룰것))  
+
+명령어 간의 종속성에 대한 추가 명시적 정보를 제공 ex: VLIW  
+- 컴파일러가 병렬 실행 가능한 명령어들을 하나의 긴 명령어로  
+- 하드웨어는 단순하지만, 컴파일러는 매우 정교  
+
+개별 데이터 전송 지정 (ex: TTA - Transport Triggered Architectures)  
+- 데이터가 하드웨어 내에서 어디서 어디로 이동하는지를 명령어에서 직접 지정  
+- 가장 낮은 수준의 제어, 컴파일러가 모든 하드웨어 흐름을 제어  
+
+</div>
+</div>
+
+### 특징
+
+가장 좋은 명령어 집합: *최상*의 구현을 만들어내느 명령어 집합  
+- 현실적인 성능과 효율을 갖춘 시스템  
+
+명령어 집합을 변경하는 것은 어렵고, 드물게 발생  
+- 하드웨어, 컴파일러, 소프트웨어가 모두 ISA에 맞춰 설계 ➡ 수십년 유지  
+
+시간이 지나면 기술 변화로 인해 비효율적일수 있음  
+필요 이상으로 복잡한 기능을 넣으면 확장성, 성능, 단순성에 방해가 될 가능성이 있음  
+
+## RISC Approach
+RISC 접근 방식은 가장 유용한 명령과 주소 지정 모드 등을 신중하게 선택 -> common-case가 가장 빠르게
+명령어는 레지스터 파일을 잘 활용하도록 설계
+간단하게 고성능 구현이 가능하도록 설계
+
+### 일반적인 특징
+- 고정 길이의 명령어 인코딩 (또는 쉽게 디코딩할 수 있도록)
+- 각 명령어는 실행 될 때 비슷한 단계를 따름
+- 데이터 메모리에 대한 액세스는 특별한 load/store 명령어로 제한
+
+> ### ARM1
+> ARM: Advanced RISC Machine
+> - Sophie Wilson 하고 Steve Furber 교수가 설계 (버클리와 스탠포드의 RISC 초기 연구 논문에 영감을 받음)  
+> Arm1
+>   - 25000개의 트랜지스터
+>   - 3단계 파이프라인
+>   - 8MHz 클럭
+>   - 온팁 캐시 없음
+
+<br>
+
+> ### CISC
+> 1970년 부터 발전
+> 최신 CISC(ex: x86) 구현:
+> - 아마 CISC 명령어를 수많은 RISC와 유사한 마이크로 연산으로 변환
+> - 마이크로 아키텍처는 그 외에는 다른 최신 고성능 프로세서와 매우 유사
